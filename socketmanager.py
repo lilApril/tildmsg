@@ -1,48 +1,42 @@
 from socket import *
-import sys
 import sqlite3
 import sys
 
 
-
 class socketprocessor:
-    def __init__(self):
-        PORT_NUMBER = 5000
-        SIZE = 1024
+    def __init__(self, profile):
+        hostName = gethostbyname('192.168.86.85')
+        self.client = socket(AF_INET, SOCK_STREAM)
+        self.client.connect((hostName, 5666))
+        self.profile = profile
 
-        hostName = gethostbyname('192.168.0.4')
-        self.con = sqlite3.connect("tilddatabase.db")
-        self.cur = self.con.cursor()
-        print(hostName)
-
-        self.socket = socket(AF_INET, SOCK_DGRAM)
-        self.socket.bind((hostName, PORT_NUMBER))
+    def registration(self, login, password, number):
+        self.client.send(bytes(f"registration|{login}|{password}|{number}", "utf-8"))
 
     def setavatar(self, picture):
-        result = self.cur.execute("""SELECT *
-                                FROM groupstable""").fetchall()
+        self.client.send(bytes(f"setavatar|{picture}", "utf-8"))
 
-    def getlogin(self):
-        result = self.cur.execute("""SELECT *
-                                FROM userstable""").fetchall()
+    def getlogin(self, login):
+        self.client.send(bytes(f"getlogin|{login}", "utf-8"))
+        return self.client.recv(256)
 
     def getnumber(self, number):
-        return self.cur.execute(f"""SELECT *
-                                        FROM userstable WHERE number = \"{number}\"""").fetchall()
+        self.client.send(bytes(f"getnumber|{number}", "utf-8"))
+        return self.client.recv(256)
+
     def getpassword(self, password):
-        return self.cur.execute(f"""SELECT *
-                                        FROM userstable WHERE password = \"{password}\"""").fetchall()
+        self.client.send(bytes(f"getpassword|{password}", "utf-8"))
+        return self.client.recv(256)
+
     def getprofile(self, login, password, number):
-        return self.cur.execute(f"""SELECT *
-                                                FROM userstable WHERE password = \"{password}\" and login = \"{login}\" and number = \"{number}\"""").fetchall()
+        self.client.send(bytes(f"getprofile|{login}|{password}|{number}", "utf-8"))
+        return self.client.recv(256)
+
     def setlogin(self, login):
-        return self.cur.execute(f"""SELECT *
-                                FROM groupstable WHERE login = \"{login}\"""").fetchall()
-    def setpassword(self):
-        result = self.cur.execute("""SELECT *
-                                FROM groupstable""").fetchall()
-    def setnumber(self):
-        result = self.cur.execute("""SELECT *
-                                FROM groupstable""").fetchall()
+        self.client.send(bytes(f"setlogin|{login}", "utf-8"))
 
+    def setpassword(self, password):
+        self.client.send(bytes(f"setpassword|{password}", "utf-8"))
 
+    def setnumber(self, number):
+        self.client.send(bytes(f"setnumber|{number}", "utf-8"))

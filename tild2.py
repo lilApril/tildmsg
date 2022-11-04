@@ -1,5 +1,5 @@
 import sys
-
+from PIL import Image, ImageDraw, ImageFilter, ImageOps
 from PyQt5 import QtCore, QtGui, Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog, QFileIconProvider
 from tildmsg import Ui_MainWindow
@@ -41,7 +41,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         pass
 
     def changeiconfunc(self):
-        fname = QtGui.QIcon(QFileDialog.getOpenFileName(self, 'Выберите файл-инициализатор L-системы', '')[0])
+        fname = QtGui.QIcon(QFileDialog.getOpenFileName(self, 'choose icon', '')[0])
+        print(fname.name())
+        size = (79, 79)
+        mask = Image.new('L', size, 0)
+        draw = ImageDraw.Draw(mask)
+        draw.ellipse((0, 0) + size, fill=255)
+
+        #im = Image.open(fname.name())
+
+        #output = ImageOps.fit(im, mask.size, centering=(0.5, 0.5))
+        #output.putalpha(mask)
+
+        #output.save('result.png')
         self.profilebutton.setIcon(fname)
     def showapp(self):
         app = QApplication(sys.argv)

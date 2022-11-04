@@ -266,10 +266,14 @@ border-radius:0px;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color:rgb(192, 187, 255);
-border-radius:35px;</string>
+border-radius:0px;</string>
         </property>
         <property name="text">
          <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>tildproject/defav.png</normaloff>tildproject/defav.png</iconset>
         </property>
         <property name="iconSize">
          <size>

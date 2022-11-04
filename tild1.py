@@ -11,8 +11,8 @@ class MyWidget(QWidget, Ui_Form):
         self.globalized = 0
         super().__init__()
         self.setupUi(self)
-        self.pushButton.clicked.connect(self.run)
-        self.pushButton_2.clicked.connect(self.run)
+        self.pushButton.clicked.connect(self.log_in)
+        self.pushButton_2.clicked.connect(self.register)
         self.ended = False
         self.login_string_marker = 1
         self.password_string_marker = 1
@@ -36,9 +36,15 @@ class MyWidget(QWidget, Ui_Form):
 
 
 
-    def run(self):
+    def log_in(self):
         if (not (self.login_string_marker and self.password_string_marker)) and len(self.socketmanagement.getprofile(login=self.lineEdit.text(), password=self.lineEdit_2.text(), number=self.lineEdit_3.text())) > 0:
             self.ended = True
+            self.close()
+
+    def register(self):
+        if (not (self.login_string_marker and self.password_string_marker)):
+            self.ended = True
+            self.socketmanagement.registration(self.lineEdit, self.lineEdit_2, self.lineEdit_3)
             self.close()
     def mobilephonenumber(self):
         if self.mobile_string_marker:
