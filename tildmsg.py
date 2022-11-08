@@ -85,7 +85,7 @@ class Ui_MainWindow(object):
         self.searchline.setGeometry(QtCore.QRect(80, 0, 151, 31))
         self.searchline.setStyleSheet("background-color: rgb(176, 176, 186);\n"
 "border: none;\n"
-"border-radius:10px;")
+"border-radius:0px;")
         self.searchline.setObjectName("searchline")
         self.dialogues = QtWidgets.QScrollArea(self.dialoguesmanager)
         self.dialogues.setGeometry(QtCore.QRect(0, 80, 231, 421))
@@ -100,9 +100,14 @@ class Ui_MainWindow(object):
         self.dialogues.setWidget(self.scrollAreaWidgetContents_2)
         self.profilebutton = QtWidgets.QPushButton(self.dialoguesmanager)
         self.profilebutton.setGeometry(QtCore.QRect(0, 0, 71, 71))
+        self.profilebutton.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.profilebutton.setAutoFillBackground(False)
         self.profilebutton.setStyleSheet("background-color:rgb(192, 187, 255);\n"
-"border-radius:35px;")
+"border-radius:0px;")
         self.profilebutton.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("tildproject/defav.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.profilebutton.setIcon(icon)
         self.profilebutton.setIconSize(QtCore.QSize(72, 72))
         self.profilebutton.setObjectName("profilebutton")
         self.dialogues.raise_()
