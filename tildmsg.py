@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(959, 540)
+        MainWindow.resize(959, 551)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -87,32 +87,24 @@ class Ui_MainWindow(object):
 "border: none;\n"
 "border-radius:0px;")
         self.searchline.setObjectName("searchline")
-        self.dialogues = QtWidgets.QScrollArea(self.dialoguesmanager)
-        self.dialogues.setGeometry(QtCore.QRect(0, 80, 231, 421))
-        self.dialogues.setStyleSheet("background-color: rgb(176, 176, 186);\n"
-"border: none;\n"
-"border-radius:0px;")
-        self.dialogues.setWidgetResizable(True)
-        self.dialogues.setObjectName("dialogues")
-        self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 231, 421))
-        self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
-        self.dialogues.setWidget(self.scrollAreaWidgetContents_2)
         self.profilebutton = QtWidgets.QPushButton(self.dialoguesmanager)
         self.profilebutton.setGeometry(QtCore.QRect(0, 0, 71, 71))
         self.profilebutton.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.profilebutton.setAutoFillBackground(False)
         self.profilebutton.setStyleSheet("background-color:rgb(192, 187, 255);\n"
-"border-radius:0px;")
+"border-radius:35px;")
         self.profilebutton.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("tildproject/defav.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.profilebutton.setIcon(icon)
-        self.profilebutton.setIconSize(QtCore.QSize(72, 72))
+        self.profilebutton.setIconSize(QtCore.QSize(71, 71))
         self.profilebutton.setObjectName("profilebutton")
-        self.dialogues.raise_()
+        self.dialoguebtn = QtWidgets.QPushButton(self.dialoguesmanager)
+        self.dialoguebtn.setGeometry(QtCore.QRect(0, 80, 231, 421))
+        self.dialoguebtn.setStyleSheet("background-color: rgb(186, 186, 196);\n"
+"border: none;\n"
+"border-radius:0px;")
+        self.dialoguebtn.setObjectName("dialoguebtn")
         self.profilebutton.raise_()
         self.searchline.raise_()
+        self.dialoguebtn.raise_()
         self.leftpanel.addWidget(self.page)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
@@ -212,17 +204,25 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_3)
         self.page_4 = QtWidgets.QWidget()
         self.page_4.setObjectName("page_4")
-        self.scrollArea_2 = QtWidgets.QScrollArea(self.page_4)
-        self.scrollArea_2.setGeometry(QtCore.QRect(0, 0, 701, 551))
-        self.scrollArea_2.setStyleSheet("background-color: rgb(186, 186, 196);\n"
+        self.stringfield = QtWidgets.QTextEdit(self.page_4)
+        self.stringfield.setGeometry(QtCore.QRect(0, 470, 661, 31))
+        self.stringfield.setStyleSheet("background-color: rgb(236, 236, 246);\n"
 "border: none;\n"
 "border-radius:0px;")
-        self.scrollArea_2.setWidgetResizable(True)
-        self.scrollArea_2.setObjectName("scrollArea_2")
-        self.scrollAreaWidgetContents_5 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, 0, 701, 551))
-        self.scrollAreaWidgetContents_5.setObjectName("scrollAreaWidgetContents_5")
-        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_5)
+        self.stringfield.setObjectName("stringfield")
+        self.sendbtn = QtWidgets.QPushButton(self.page_4)
+        self.sendbtn.setGeometry(QtCore.QRect(654, 468, 51, 41))
+        self.sendbtn.setStyleSheet("background-color: rgb(106, 106, 126);\n"
+"border: none;\n"
+"border-radius:0px;")
+        self.sendbtn.setObjectName("sendbtn")
+        self.textbrowser = QtWidgets.QLabel(self.page_4)
+        self.textbrowser.setGeometry(QtCore.QRect(0, 0, 711, 471))
+        self.textbrowser.setStyleSheet("background-color: rgb(186, 186, 196);\n"
+"border: none;\n"
+"border-radius:0px;")
+        self.textbrowser.setText("")
+        self.textbrowser.setObjectName("textbrowser")
         self.stackedWidget.addWidget(self.page_4)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -237,6 +237,9 @@ class Ui_MainWindow(object):
         self.resizebtn.setToolTip(_translate("MainWindow", "Restore"))
         self.closebtn.setToolTip(_translate("MainWindow", "Close"))
         self.label.setText(_translate("MainWindow", " tild~"))
+        self.dialoguebtn.setText(_translate("MainWindow", "Для начала общения \n"
+"введите в поисковую строку\n"
+"номер собеседника."))
         self.changeicon.setText(_translate("MainWindow", "Change icon"))
         self.changename.setText(_translate("MainWindow", "Change name"))
         self.changepassword.setText(_translate("MainWindow", "Change password"))
@@ -245,3 +248,9 @@ class Ui_MainWindow(object):
         self.addnewgroup.setText(_translate("MainWindow", "New group"))
         self.backbtn.setText(_translate("MainWindow", "Back"))
         self.label_2.setText(_translate("MainWindow", " Select a dialog and start a conversation"))
+        self.stringfield.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.sendbtn.setText(_translate("MainWindow", ">"))
