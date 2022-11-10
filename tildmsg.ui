@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>959</width>
-    <height>540</height>
+    <height>551</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -166,7 +166,7 @@ border-radius:10px;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(176, 176, 186);
+       <string notr="true">background-color:rgb(192, 187, 255);
 border-radius:8px;
 </string>
       </property>
@@ -216,38 +216,10 @@ border-radius:8px;
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(176, 176, 186);
+         <string notr="true">background-color: rgb(192, 187, 255);
 border: none;
 border-radius:0px;</string>
         </property>
-       </widget>
-       <widget class="QScrollArea" name="dialogues">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>80</y>
-          <width>231</width>
-          <height>421</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(176, 176, 186);
-border: none;
-border-radius:0px;</string>
-        </property>
-        <property name="widgetResizable">
-         <bool>true</bool>
-        </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents_2">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>231</width>
-           <height>421</height>
-          </rect>
-         </property>
-        </widget>
        </widget>
        <widget class="QPushButton" name="profilebutton">
         <property name="geometry">
@@ -266,25 +238,54 @@ border-radius:0px;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color:rgb(192, 187, 255);
-border-radius:0px;</string>
+border-radius:35px;</string>
         </property>
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>tildproject/defav.png</normaloff>tildproject/defav.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
-          <width>72</width>
-          <height>72</height>
+          <width>71</width>
+          <height>71</height>
          </size>
         </property>
        </widget>
-       <zorder>dialogues</zorder>
+       <widget class="QPushButton" name="dialoguebtn">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>31</y>
+          <width>81</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(156, 156, 206);
+border: none;
+border-radius:0px;</string>
+        </property>
+        <property name="text">
+         <string>-&gt;</string>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="dialoguelist">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>80</y>
+          <width>231</width>
+          <height>421</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:rgb(192, 187, 255);
+border-radius:0px;</string>
+        </property>
+       </widget>
        <zorder>profilebutton</zorder>
        <zorder>searchline</zorder>
+       <zorder>dialoguebtn</zorder>
+       <zorder>dialoguelist</zorder>
       </widget>
      </widget>
      <widget class="QWidget" name="page_2">
@@ -400,7 +401,7 @@ border-radius:0px;</string>
          <string>Change phone number</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="adddialogue">
+       <widget class="QPushButton" name="quitacc">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -421,7 +422,7 @@ border-radius:0px;</string>
          <string notr="true">background-color:rgb(176, 176, 186);</string>
         </property>
         <property name="text">
-         <string>Add friend-dialogue</string>
+         <string>Quit from account</string>
         </property>
        </widget>
        <widget class="QPushButton" name="addnewgroup">
@@ -485,7 +486,7 @@ border-radius:0px;</string>
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_3">
       <widget class="QLabel" name="label_2">
@@ -508,7 +509,7 @@ border-radius:0px;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(176, 176, 186), stop:1  rgb(206, 206, 216));
+        <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(192, 187, 255), stop:1  rgb(226, 226, 255));
 border-radius:0px;</string>
        </property>
        <property name="text">
@@ -517,13 +518,53 @@ border-radius:0px;</string>
       </widget>
      </widget>
      <widget class="QWidget" name="page_4">
-      <widget class="QScrollArea" name="scrollArea_2">
+      <widget class="QTextEdit" name="stringfield">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>470</y>
+         <width>661</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(236, 236, 246);
+border: none;
+border-radius:0px;</string>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="sendbtn">
+       <property name="geometry">
+        <rect>
+         <x>654</x>
+         <y>468</y>
+         <width>51</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(106, 106, 126);
+border: none;
+border-radius:0px;</string>
+       </property>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </widget>
+      <widget class="QTextBrowser" name="textbrowser">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
          <width>701</width>
-         <height>551</height>
+         <height>471</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -531,19 +572,6 @@ border-radius:0px;</string>
 border: none;
 border-radius:0px;</string>
        </property>
-       <property name="widgetResizable">
-        <bool>true</bool>
-       </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents_5">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>701</width>
-          <height>551</height>
-         </rect>
-        </property>
-       </widget>
       </widget>
      </widget>
     </widget>

@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
         font.setItalic(False)
         font.setWeight(50)
         self.label.setFont(font)
-        self.label.setStyleSheet("background-color:rgb(176, 176, 186);\n"
+        self.label.setStyleSheet("background-color:rgb(192, 187, 255);\n"
 "border-radius:8px;\n"
 "")
         self.label.setObjectName("label")
@@ -83,7 +83,7 @@ class Ui_MainWindow(object):
         self.dialoguesmanager.setObjectName("dialoguesmanager")
         self.searchline = QtWidgets.QLineEdit(self.dialoguesmanager)
         self.searchline.setGeometry(QtCore.QRect(80, 0, 151, 31))
-        self.searchline.setStyleSheet("background-color: rgb(176, 176, 186);\n"
+        self.searchline.setStyleSheet("background-color: rgb(192, 187, 255);\n"
 "border: none;\n"
 "border-radius:0px;")
         self.searchline.setObjectName("searchline")
@@ -97,14 +97,20 @@ class Ui_MainWindow(object):
         self.profilebutton.setIconSize(QtCore.QSize(71, 71))
         self.profilebutton.setObjectName("profilebutton")
         self.dialoguebtn = QtWidgets.QPushButton(self.dialoguesmanager)
-        self.dialoguebtn.setGeometry(QtCore.QRect(0, 80, 231, 421))
-        self.dialoguebtn.setStyleSheet("background-color: rgb(186, 186, 196);\n"
+        self.dialoguebtn.setGeometry(QtCore.QRect(150, 31, 81, 31))
+        self.dialoguebtn.setStyleSheet("background-color: rgb(156, 156, 206);\n"
 "border: none;\n"
 "border-radius:0px;")
         self.dialoguebtn.setObjectName("dialoguebtn")
+        self.dialoguelist = QtWidgets.QListWidget(self.dialoguesmanager)
+        self.dialoguelist.setGeometry(QtCore.QRect(0, 80, 231, 421))
+        self.dialoguelist.setStyleSheet("background-color:rgb(192, 187, 255);\n"
+"border-radius:0px;")
+        self.dialoguelist.setObjectName("dialoguelist")
         self.profilebutton.raise_()
         self.searchline.raise_()
         self.dialoguebtn.raise_()
+        self.dialoguelist.raise_()
         self.leftpanel.addWidget(self.page)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
@@ -152,16 +158,16 @@ class Ui_MainWindow(object):
         self.changenumber.setFont(font)
         self.changenumber.setStyleSheet("background-color:rgb(176, 176, 186);")
         self.changenumber.setObjectName("changenumber")
-        self.adddialogue = QtWidgets.QPushButton(self.contextmenu)
-        self.adddialogue.setGeometry(QtCore.QRect(0, 280, 231, 61))
+        self.quitacc = QtWidgets.QPushButton(self.contextmenu)
+        self.quitacc.setGeometry(QtCore.QRect(0, 280, 231, 61))
         font = QtGui.QFont()
         font.setFamily("Gisha")
         font.setPointSize(12)
         font.setBold(False)
         font.setWeight(50)
-        self.adddialogue.setFont(font)
-        self.adddialogue.setStyleSheet("background-color:rgb(176, 176, 186);")
-        self.adddialogue.setObjectName("adddialogue")
+        self.quitacc.setFont(font)
+        self.quitacc.setStyleSheet("background-color:rgb(176, 176, 186);")
+        self.quitacc.setObjectName("quitacc")
         self.addnewgroup = QtWidgets.QPushButton(self.contextmenu)
         self.addnewgroup.setGeometry(QtCore.QRect(0, 350, 231, 61))
         font = QtGui.QFont()
@@ -198,7 +204,7 @@ class Ui_MainWindow(object):
         font.setUnderline(False)
         font.setWeight(50)
         self.label_2.setFont(font)
-        self.label_2.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(176, 176, 186), stop:1  rgb(206, 206, 216));\n"
+        self.label_2.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb(192, 187, 255), stop:1  rgb(226, 226, 255));\n"
 "border-radius:0px;")
         self.label_2.setObjectName("label_2")
         self.stackedWidget.addWidget(self.page_3)
@@ -216,19 +222,18 @@ class Ui_MainWindow(object):
 "border: none;\n"
 "border-radius:0px;")
         self.sendbtn.setObjectName("sendbtn")
-        self.textbrowser = QtWidgets.QLabel(self.page_4)
-        self.textbrowser.setGeometry(QtCore.QRect(0, 0, 711, 471))
+        self.textbrowser = QtWidgets.QTextBrowser(self.page_4)
+        self.textbrowser.setGeometry(QtCore.QRect(0, 0, 701, 471))
         self.textbrowser.setStyleSheet("background-color: rgb(186, 186, 196);\n"
 "border: none;\n"
 "border-radius:0px;")
-        self.textbrowser.setText("")
         self.textbrowser.setObjectName("textbrowser")
         self.stackedWidget.addWidget(self.page_4)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         self.leftpanel.setCurrentIndex(0)
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -237,14 +242,12 @@ class Ui_MainWindow(object):
         self.resizebtn.setToolTip(_translate("MainWindow", "Restore"))
         self.closebtn.setToolTip(_translate("MainWindow", "Close"))
         self.label.setText(_translate("MainWindow", " tild~"))
-        self.dialoguebtn.setText(_translate("MainWindow", "Для начала общения \n"
-"введите в поисковую строку\n"
-"номер собеседника."))
+        self.dialoguebtn.setText(_translate("MainWindow", "->"))
         self.changeicon.setText(_translate("MainWindow", "Change icon"))
         self.changename.setText(_translate("MainWindow", "Change name"))
         self.changepassword.setText(_translate("MainWindow", "Change password"))
         self.changenumber.setText(_translate("MainWindow", "Change phone number"))
-        self.adddialogue.setText(_translate("MainWindow", "Add friend-dialogue"))
+        self.quitacc.setText(_translate("MainWindow", "Quit from account"))
         self.addnewgroup.setText(_translate("MainWindow", "New group"))
         self.backbtn.setText(_translate("MainWindow", "Back"))
         self.label_2.setText(_translate("MainWindow", " Select a dialog and start a conversation"))

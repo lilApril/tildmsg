@@ -9,23 +9,24 @@ class socketprocessor:
         self.client = socket(AF_INET, SOCK_STREAM)
         self.client.connect((hostName, 5666))
 
+    def getloginfromid(self, id):
+        self.client.send(bytes(f"getloginfromid|{id}", "utf-8"))
+        return self.client.recv(2048)
+
     def registration(self, login, password, number):
         self.client.send(bytes(f"registration|{login}|{password}|{number}", "utf-8"))
         print('ok2')
 
+    def getchatname(self, id, id1):
+        self.client.send(bytes(f"getchatname|{id}|{id1}", "utf-8"))
+        return self.client.recv(2048)
+
+    def sendmessage(self, id, chatname, message):
+        self.client.send(bytes(f"sendmessage|{id}|{chatname}|{message}", "utf-8"))
+
     def idfromnumber(self, number):
         self.client.send(bytes(f"idfromnumber|{number}", "utf-8"))
         return self.client.recv(2048)
-
-    def setavatar(self, picture, id):
-        #self.client.send(bytes(f"setavatar|{id}", "utf-8"))
-        #file = open(picture, mode='rb')
-        #datapic = file.read(2048)
-        #while datapic:
-             #self.client.send(datapic)
-             #datapic = file.read(2048)
-        #file.close()
-        pass
 
     def getids(self, id):
         id = str(id)
@@ -45,10 +46,9 @@ class socketprocessor:
     def gettext(self, id, id1):
         print(id, id1)
         self.client.send(bytes(f"gettext|{id}|{id1}", "utf-8"))
-        return self.client.recv(2048)
-
-    def getpassword(self, password):
-        self.client.send(bytes(f"getpassword|{password}", "utf-8"))
+        return self.client.recv(1048576)
+    def getpassword(self, id, password):
+        self.client.send(bytes(f"getpassword|{id}|{password}", "utf-8"))
         return self.client.recv(2048)
 
     def getprofile(self, login, password, number):
@@ -63,4 +63,10 @@ class socketprocessor:
 
     def setnumber(self, number, id):
         self.client.send(bytes(f"setnumber|{number}|{id}", "utf-8"))
+
+    def getgroups(self, id):
+        self.client.send(bytes(f"getgroups|{id}", "utf-8"))
+        return self.client.recv(2048)
+    def addgroup(self, id, name):
+        self.client.send(bytes(f"addgroup|{id}|{name}", "utf-8"))
 

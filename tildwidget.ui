@@ -69,7 +69,7 @@ border-radius:0px;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(176, 176, 186);
+     <string notr="true">background-color:rgb(192, 187, 255);
 border-radius:2px;</string>
     </property>
     <property name="text">
@@ -92,7 +92,7 @@ border-radius:2px;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(176, 176, 186);
+     <string notr="true">background-color:rgb(192, 187, 255);
 border-radius:2px;</string>
     </property>
     <property name="text">
@@ -115,7 +115,7 @@ border-radius:2px;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(176, 176, 186);
+     <string notr="true">background-color:rgb(192, 187, 255);
 border-radius:2px;</string>
     </property>
     <property name="text">

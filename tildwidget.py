@@ -45,7 +45,7 @@ class Ui_Form(object):
         font.setStrikeOut(False)
         font.setKerning(True)
         self.lineEdit.setFont(font)
-        self.lineEdit.setStyleSheet("background-color:rgb(176, 176, 186);\n"
+        self.lineEdit.setStyleSheet("background-color:rgb(192, 187, 255);\n"
 "border-radius:2px;")
         self.lineEdit.setObjectName("lineEdit")
         self.lineEdit_2 = QtWidgets.QLineEdit(self.frame)
@@ -54,7 +54,7 @@ class Ui_Form(object):
         font.setFamily("Century Gothic")
         font.setPointSize(10)
         self.lineEdit_2.setFont(font)
-        self.lineEdit_2.setStyleSheet("background-color:rgb(176, 176, 186);\n"
+        self.lineEdit_2.setStyleSheet("background-color:rgb(192, 187, 255);\n"
 "border-radius:2px;")
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.lineEdit_3 = QtWidgets.QLineEdit(self.frame)
@@ -63,7 +63,7 @@ class Ui_Form(object):
         font.setFamily("Century Gothic")
         font.setPointSize(10)
         self.lineEdit_3.setFont(font)
-        self.lineEdit_3.setStyleSheet("background-color:rgb(176, 176, 186);\n"
+        self.lineEdit_3.setStyleSheet("background-color:rgb(192, 187, 255);\n"
 "border-radius:2px;")
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.pushButton = QtWidgets.QPushButton(self.frame)

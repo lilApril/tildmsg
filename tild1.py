@@ -40,13 +40,15 @@ class MyWidget(QWidget, Ui_Form):
         sys.exit()
 
     def log_in(self):
-        global profileid
-        profileid = str(self.socketmanagement.getprofile(login=self.lineEdit.text(), password=self.lineEdit_2.text(),
-                                                     number=self.lineEdit_3.text()).decode('utf-8').strip('(').strip(')').strip(','))
-        if (not (self.login_string_marker and self.password_string_marker)) and len(profileid) > 0 and profileid != '|':
+        if (not (self.login_string_marker and self.password_string_marker)) and len(self.lineEdit.text()) > 0 and len(self.lineEdit_2.text()) > 0 and len(self.lineEdit_3.text()) > 0 and '|' not in self.lineEdit.text() and '|' not in self.lineEdit_2.text() and '|' not in self.lineEdit_3.text():
+            global profileid
+            profileid = str(
+                self.socketmanagement.getprofile(login=self.lineEdit.text(), password=self.lineEdit_2.text(),
+                                                 number=self.lineEdit_3.text()).decode('utf-8').strip('(').strip(
+                    ')').strip(','))
             self.ended = True
             self.close()
-        elif profileid.decode('utf-8') == '|':
+        else:
             self.lineEdit.setText('<incorrect> login')
             self.lineEdit_2.setText('<incorrect> password')
             self.lineEdit_3.setText('<incorrect> number')
@@ -56,10 +58,24 @@ class MyWidget(QWidget, Ui_Form):
 
 
     def register(self):
-        if (not (self.login_string_marker and self.password_string_marker)):
+        if (not (self.login_string_marker and self.password_string_marker)) and len(self.lineEdit.text()) > 0 and len(
+                self.lineEdit_2.text()) > 0 and len(
+                self.lineEdit_3.text()) > 0 and '|' not in self.lineEdit.text() and '|' not in self.lineEdit_2.text() and '|' not in self.lineEdit_3.text():
+            self.socketmanagement.registration(login=self.lineEdit.text(), password=self.lineEdit_2.text(), number=self.lineEdit_3.text())
+            global profileid
+            profileid = str(
+                self.socketmanagement.getprofile(login=self.lineEdit.text(), password=self.lineEdit_2.text(),
+                                                 number=self.lineEdit_3.text()).decode('utf-8').strip('(').strip(
+                    ')').strip(','))
             self.ended = True
-            self.socketmanagement.registration(self.lineEdit, self.lineEdit_2, self.lineEdit_3)
             self.close()
+        else:
+            self.lineEdit.setText('<incorrect> login')
+            self.lineEdit_2.setText('<incorrect> password')
+            self.lineEdit_3.setText('<incorrect> number')
+            self.login_string_marker = 1
+            self.password_string_marker = 1
+            self.mobile_string_marker = 1
 
     def mobilephonenumber(self):
         if self.mobile_string_marker:
@@ -78,6 +94,15 @@ class MyWidget(QWidget, Ui_Form):
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
+
+    def showapp(self):
+        app = QApplication(sys.argv)
+        self.show()
+        app.exec_()
+        if ex.ended:
+            print(profileid)
+            MainWindow(profileid, ex.socketmanagement).showapp()
+        self.close()
 
 
 def except_hook(cls, exception, traceback):
