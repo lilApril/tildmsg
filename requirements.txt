@@ -1,0 +1,7 @@
+PyQt5
+socket
+Pillow
+os
+sys
+sqlite3
+multiprocessing

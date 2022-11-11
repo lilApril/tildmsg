@@ -5,7 +5,7 @@ import sys
 
 class socketprocessor:
     def __init__(self):
-        hostName = gethostbyname('192.168.0.4')
+        hostName = gethostbyname(input())
         self.client = socket(AF_INET, SOCK_STREAM)
         self.client.connect((hostName, 5666))
 
