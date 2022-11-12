@@ -11,11 +11,8 @@ from PyQt5.QtWidgets import QLabel, QLineEdit, QListWidget, QListWidgetItem, QHB
 from PyQt5.QtWidgets import QInputDialog
 
 
-
-
-
-
 class MainWindow(QMainWindow, Ui_MainWindow):
+    # инициализация окна, установка аватара профиля и вкладок чатов в чатлист
     def __init__(self, loginvalues, socketvalue):
         self.loginvalues = loginvalues
         super().__init__()
@@ -54,6 +51,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sendbtn.clicked.connect(self.sendmessage)
         self.dialoguelist.addItems(self.chats + self.dialogues)
 
+        # инструкция к событию передвижения окна
         def moveWindow(event):
             self.move(self.pos() + event.globalPos() - self.dragPos)
             self.dragPos = event.globalPos()
@@ -61,13 +59,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.titlebar.mouseMoveEvent = moveWindow
 
+    # ============================================================================
+    # Функции диалогов контекстного меню
     def addgroup(self):
         name, ok_pressed = QInputDialog.getText(self, "",
                                                 "Название группы:")
-        name = name.replace('|', '')
-
-        if ok_pressed and name != 'empty':
-            self.socketmanager.addgroup(self.loginvalues, name)
+        if not any(map(str.isdigit, name)):
+            name = name.replace('|', '')
+            if ok_pressed and name != 'empty':
+                self.socketmanager.addgroup(self.loginvalues, name)
+        self.dialogues = []
+        self.chats = []
+        for i in self.socketmanager.getids(self.loginvalues).decode('utf-8').split('|'):
+            if str(i).isalnum():
+                self.dialogues.append(self.socketmanager.getloginfromid(i).decode('utf-8') + '|' + str(i))
+            else:
+                self.chats.append(str(i))
+        if len(self.chats) == 0:
+            self.chats.extend(self.socketmanager.getgroups(self.loginvalues).decode('utf-8').split('|'))
+        self.dialoguelist.clear()
+        self.dialoguelist.addItems(self.chats + self.dialogues)
 
     def changenamefunc(self):
         name, ok_pressed = QInputDialog.getText(self, "",
@@ -76,7 +87,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         if ok_pressed:
             self.socketmanager.setlogin(name, self.loginvalues)
-
 
     def changepasswordfunc(self):
         name, ok_pressed = QInputDialog.getText(self, "",
@@ -89,22 +99,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def changenumberfunc(self):
         name, ok_pressed = QInputDialog.getText(self, "Введите имя",
                                                 "Введите новый номер:")
-        name = name.replace('|', '')
-        if ok_pressed:
-            self.socketmanager.setnumber(name, self.loginvalues)
+        if name.isnumeric():
+            name = name.replace('|', '')
+            if ok_pressed:
+                self.socketmanager.setnumber(name, self.loginvalues)
 
+    # ============================================================================
+    # Функция, отвечающая за отображение содержимого чата и отображение чатов в чатлисте
     def showdialogue(self):
         self.stackedWidget.setCurrentIndex(1)
-        if len(self.searchline.text()) > 0:
+        if len(self.searchline.text()) > 0 and '|' not in self.searchline.text():
             self.anotherid = str(self.socketmanager.idfromnumber(self.searchline.text()).decode('utf-8'))
-            gottext = self.socketmanager.gettext(self.loginvalues, self.anotherid).decode('utf-8')
-            self.textbrowser.setText(gottext)
-            self.chatname = self.socketmanager.getchatname(self.loginvalues, self.anotherid).decode('utf-8')
-            if '|' in self.chatname:
-                self.chatname = self.anotherid
-            self.sendbtn.setEnabled(1)
-        else:
-            self.anotherid = self.dialoguelist.currentItem().text().split('|')[1] if len(self.dialoguelist.currentItem().text().split('|')) > 1 else self.dialoguelist.currentItem().text()
+            if self.anotherid != 'empty':
+                gottext = self.socketmanager.gettext(self.loginvalues, self.anotherid).decode('utf-8')
+                self.textbrowser.setText(gottext)
+                self.chatname = self.socketmanager.getchatname(self.loginvalues, self.anotherid).decode('utf-8')
+                if '|' in self.chatname:
+                    self.chatname = self.anotherid
+                self.sendbtn.setEnabled(1)
+        elif '|' not in self.searchline.text():
+            self.anotherid = self.dialoguelist.currentItem().text().split('|')[1] if len(
+                self.dialoguelist.currentItem().text().split('|')) > 1 else self.dialoguelist.currentItem().text()
             if self.anotherid != 'empty':
                 gottext = self.socketmanager.gettext(self.loginvalues, self.anotherid).decode('utf-8')
                 self.textbrowser.setText(gottext)
@@ -124,7 +139,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.dialoguelist.clear()
         self.dialoguelist.addItems(self.chats + self.dialogues)
 
-
+    # Функция отправки сообщения
     def sendmessage(self):
         self.socketmanager.sendmessage(self.loginvalues, self.chatname, self.stringfield.toPlainText().replace('|', ''))
         self.textbrowser.setText(self.socketmanager.gettext(self.loginvalues, self.chatname).decode('utf-8'))
@@ -141,19 +156,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.dialoguelist.clear()
         self.dialoguelist.addItems(self.chats + self.dialogues)
 
+    # Событие нажатия на круглую красную кнопку в правом верхнем углу
     def closebtnevent(self):
         self.socketmanager.ext()
         self.close()
 
+    # Событие нажатия на круглую синюю кнопку в правом верхнем углу
     def maximize_restore(self):
         self.showMinimized()
 
-    def run(self):
-        pass
-
+    # Контекстное меню: поменять аватар профиля
     def changeiconfunc(self):
         fname = QFileDialog.getOpenFileName(self, 'choose icon', '')[0]
-        print(fname)
         size = (79, 79)
         mask = Image.new('L', size, 0)
         draw = ImageDraw.Draw(mask)
@@ -165,22 +179,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         output.save(f'{self.loginvalues}.png')
         self.profilebutton.setIcon(QtGui.QIcon(f'{self.loginvalues}.png'))
 
+    # К этому методу обращается tild1.py чтобы запустить приложение
     def showapp(self):
         app = QApplication(sys.argv)
         self.show()
         app.exec_()
         self.close()
 
+    # Закрытие контекстного меню
     def calldialoguesmanager(self):
         self.leftpanel.setCurrentIndex(0)
 
+    # Открытие контекстного меню
     def callcontextmenu(self):
         self.leftpanel.setCurrentIndex(1)
 
+    # Отвечает за перемещение окна
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
 
+    # Контекстное мени Quit from account
     def exitacc(self):
         os.startfile(os.getcwd() + '/' + 'tild1.py')
         self.close()
-
