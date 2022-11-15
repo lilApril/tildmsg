@@ -72,7 +72,7 @@ class manager:
 
     # функция обработки отпраки сообщения
     def sendmessage(self, id, chatname, message):
-        if not chatname.isalnum():
+        if not chatname.isnumeric():
             processedmsg = self.cur.execute(f"""SELECT chats
                                                         FROM chatstable WHERE id = \"{chatname}\"""").fetchall()[0][
                                0] + self.getlogin(id) + ':' + '|' + message + '||'
